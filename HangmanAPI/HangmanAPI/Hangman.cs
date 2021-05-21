@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace HangmanAPI
 {
@@ -25,9 +26,12 @@ namespace HangmanAPI
     public class Hangman
     {
         private readonly string _solution;
+        private readonly int _allowedGuesses;
+        private int _guesses;
 
-        public Hangman(string solution)
+        public Hangman(string solution, int allowedGuesses)
         {
+            _allowedGuesses = allowedGuesses;
             _solution = solution;
         }
 
@@ -35,19 +39,34 @@ namespace HangmanAPI
 
         public char[] Play()
         {
-            return new[] {'a'};
+            return _solution.Select(x => HiddenCharacter).ToArray();
         }
 
         public GuessResult Guess(char guess)
         {
-            throw new NotImplementedException();
+            _guesses++;
+
+            if (_guesses >_allowedGuesses)
+            {
+                return new GuessResult
+                {
+                    Status = Status.Lost,
+                    Solution = null
+                };
+            }
+
+            return new GuessResult
+            {
+                Status = Status.InProgress,
+                Solution = null
+            };
         }
     }
 
     public class GuessResult
     {
-        public Status Status { get; private set; }
-        public char[] Solution { get; private set; }
+        public Status Status { get; internal set; }
+        public char[] Solution { get; internal set; }
     }
 
     public enum Status
