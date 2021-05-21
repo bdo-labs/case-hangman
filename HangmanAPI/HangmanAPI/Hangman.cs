@@ -2,13 +2,40 @@
 
 namespace HangmanAPI
 {
+    public class HangmanServer : IHangman
+    {
+        public char[] Play()
+        {
+            throw new NotImplementedException();
+        }
+
+        public GuessResult Guess(char guess)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public interface IHangman
+    {
+        char[] Play();
+
+        GuessResult Guess(char guess);
+    }
+
     public class Hangman
     {
+        private readonly string _solution;
+
+        public Hangman(string solution)
+        {
+            _solution = solution;
+        }
+
         public const char HiddenCharacter = '_';
 
         public char[] Play()
         {
-            throw new NotImplementedException();
+            return new[] {'a'};
         }
 
         public GuessResult Guess(char guess)

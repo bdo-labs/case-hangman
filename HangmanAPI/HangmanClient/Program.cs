@@ -6,7 +6,7 @@ namespace HangmanClient
     {
         static void Main(string[] args)
         {
-            var hangman = new Hangman();
+            var hangman = new HangmanServer();
             
             var solution = hangman.Play();
 
