@@ -1,4 +1,4 @@
-﻿using System;
+﻿using HangmanAPI;
 
 namespace HangmanClient
 {
@@ -6,7 +6,14 @@ namespace HangmanClient
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var hangman = new Hangman();
+            
+            var solution = hangman.Play();
+
+            // input loop for client
+            // loop through characters from console
+
+            var guessResult = hangman.Guess('a');
         }
     }
 }
