@@ -67,6 +67,7 @@ namespace HangmanAPI
     {
         public Status Status { get; internal set; }
         public char[] Solution { get; internal set; }
+        public bool SuccessfulGuess { get; internal set; }
     }
 
     public enum Status
