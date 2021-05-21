@@ -7,13 +7,24 @@ namespace HangmanClient
     {
         static void Main(string[] args)
         {
+            while (true)
+            {
+                PlayGame();
+                PromptForRestart();
+            }
+        }
+
+        static void PlayGame()
+        {
             var hangman = new HangmanServer();
-            
+
             var solution = hangman.Play();
 
             Print(new string(solution));
 
-            while (true)
+            var status = Status.InProgress;
+
+            while (status == Status.InProgress)
             {
                 try
                 {
@@ -22,7 +33,7 @@ namespace HangmanClient
                     var result = hangman.Guess(toGuess);
 
                     solution = result.Solution;
-                    switch(result.Status)
+                    switch (result.Status)
                     {
                         case Status.InProgress:
                             var message = result.SuccessfulGuess ? "Correct!" : "Wrong :/";
@@ -35,11 +46,24 @@ namespace HangmanClient
                             PrintWon(new string(solution));
                             break;
                     }
+
+                    status = result.Status;
                 }
                 catch (Exception ex)
                 {
                     Print(new string(solution), ex.Message);
                 }
+            }
+        }
+
+        static void PromptForRestart()
+        {
+            Console.WriteLine("\nPress enter to restart");
+            var key = Console.ReadKey();
+
+            while (key.Key != ConsoleKey.Enter)
+            {
+                key = Console.ReadKey();
             }
         }
 
