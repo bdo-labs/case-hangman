@@ -5,14 +5,21 @@ namespace HangmanAPI
 {
     public class HangmanServer : IHangman
     {
+        Hangman _hangman;
+
+        public HangmanServer()
+        {
+            _hangman = new Hangman("apekatt", 10);
+        }
+
         public char[] Play()
         {
-            throw new NotImplementedException();
+            return _hangman.Play();
         }
 
         public GuessResult Guess(char guess)
         {
-            throw new NotImplementedException();
+            return _hangman.Guess(guess);
         }
     }
 
